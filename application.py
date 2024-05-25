@@ -22,9 +22,9 @@ def process_text():
     # Process the input text and display page with restul?
     if request.method == 'POST':
         data = request.form['text']
-        response = mistral(make_prompt(1, data))
-        card = json.loads(response)
-    return render_template('index.html', question=card["front"], answer=card["back"])
+        response = mistral(make_prompt(5, data))
+        cards = json.loads(response)
+    return render_template('index.html', question=cards[0]["front"], answer=cards[0]["back"])
 
 if __name__ == '__main__':
     application.run(port=8000 ,debug=True)

@@ -6,4 +6,4 @@ json_schema = """
     }
 """
 def make_prompt(n, text):
-    return "Generate " + str(n) + " flashcard questions and answers in the JSON format `" + json_schema + "` to test retention of the factual information in the following text: \"" + text + "\""
+    return "Generate " + str(n) + " flashcard questions and answers as a JSON array of objects in the format `" + json_schema + "` to test retention of the factual information in the following text: \"" + text + "\""
