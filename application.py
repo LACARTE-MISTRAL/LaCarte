@@ -21,7 +21,7 @@ def process_text():
     if request.method == 'POST':
         data = request.form['text']
         print(data)
-    return "Results"
+    return render_template('index.html', question="Question-test", answer="Answer-test")
 
 if __name__ == '__main__':
     application.run(port=8000 ,debug=True)

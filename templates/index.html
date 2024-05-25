@@ -6,10 +6,18 @@
     <title>LA CARTE</title>
 </head>
 <body>
-    <div>
+    <div id="">
         <form action="/process_text" method="POST">
             <textarea rows="1" name="text" autofocus placeholder="placeholder"></textarea>
             <button type="submit"   name="action" value="client_input">Send</button>
+        </form>
+    </div>
+    <div id="flash-card">
+        <form id="flash-card-front">
+            <h6><b>{{ question }}</b></h6>
+        </form>
+        <form if="flash-card-back">
+            <h6><b>{{ answer }}</b></h6>
         </form>
     </div>
 </body>
