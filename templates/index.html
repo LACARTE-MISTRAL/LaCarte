@@ -3,22 +3,30 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>LA CARTE</title>
 </head>
 <body>
-    <div id="">
-        <form action="/process_text" method="POST">
-            <textarea rows="1" name="text" autofocus placeholder="placeholder"></textarea>
-            <button type="submit"   name="action" value="client_input">Send</button>
+    
+    <div id="initial">
+        <div>
+            <h1>LA CARTE</h1>
+        </div>
+        <form id="generate-button"  action="/process_text" method="POST">
+            <textarea name="text" autofocus placeholder="Enter text"></textarea>
+            <button type="submit">Generate Flashcards</button>
         </form>
     </div>
-    <div id="flash-card">
-        <form id="flash-card-front">
-            <h6><b>{{ question }}</b></h6>
-        </form>
-        <form if="flash-card-back">
-            <h6><b>{{ answer }}</b></h6>
+    <div id="flash-cards">
+        <form id="flash-cards-form">
+            <div id="card-front-text"></div>
+            <div id="card-back-text"></div>
+            <button type="submit">Previous</button>
+            <button type="submit">Flip</button>
+            <button type="submit">Next</button>
         </form>
     </div>
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
+
 </html>

@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px; 
+    line-height: 1.5; 
+    letter-spacing: 0.05em;
+}
+
+
+#initial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#initial h1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+#initial form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#initial textarea {
+    font-size: 24px;
+    margin-bottom: 20px;
+    width: 80%; 
+    height: 250px;
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    outline: none !important;
+    resize: none;
+}
+
+#initial button {
+    border: 1 px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#flash-cards {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px; 
+    line-height: 1.5; 
+    letter-spacing: 0.05em;
+}

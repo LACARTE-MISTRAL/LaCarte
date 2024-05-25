@@ -5,6 +5,7 @@ import json
 from mistral import mistral
 from prompt import make_prompt
 
+
 # API KEY AND MODEL
 load_dotenv()
 model = "mistral-large-latest"
@@ -24,7 +25,9 @@ def process_text():
         data = request.form['text']
         response = mistral(make_prompt(5, data))
         cards = json.loads(response)
-    return render_template('index.html', question=cards[0]["front"], answer=cards[0]["back"])
+    return cards
+
+
 
 if __name__ == '__main__':
     application.run(port=8000 ,debug=True)
