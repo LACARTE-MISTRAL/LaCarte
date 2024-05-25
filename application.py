@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect
 import os
+import json
 from mistral import mistral
 from prompt import make_prompt
 
@@ -21,8 +22,9 @@ def process_text():
     # Process the input text and display page with restul?
     if request.method == 'POST':
         data = request.form['text']
-        print(data)
-    return render_template('index.html', question="Question-test", answer="Answer-test")
+        response = mistral(make_prompt(1, data))
+        card = json.loads(response)
+    return render_template('index.html', question=card["front"], answer=card["back"])
 
 if __name__ == '__main__':
     application.run(port=8000 ,debug=True)
