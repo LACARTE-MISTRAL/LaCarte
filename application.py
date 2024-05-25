@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect
 import os
+from mistralai import 
 
 
 # API KEY AND MODEL
