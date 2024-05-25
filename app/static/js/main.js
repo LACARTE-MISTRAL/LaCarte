@@ -13,9 +13,6 @@ document.addEventListener('DOMContentLoaded', event => {
     submitTextForm.addEventListener('submit', event =>
     {
         event.preventDefault();
-        console.log("Event started");
-        initialDisplay.style.display = 'none';
-        flashCardsDisplay.style.display = 'block';
 
         fetch (submitTextForm.action, {
             method: submitTextForm.method,
@@ -23,6 +20,15 @@ document.addEventListener('DOMContentLoaded', event => {
         }).then(response => response.json())
         .then(data => {
             
+            if (Object.keys(data).length === 0 && data.constructor === Object)
+            {
+                alert('We can\'t make flashcards with that input, please try again')
+                return;
+            }
+
+            initialDisplay.style.display = 'none';
+            flashCardsDisplay.style.display = 'block';
+
             let cardIndex = 0;
             let cards = data;
             let maxCardValue = cards.length;

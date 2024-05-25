@@ -2,7 +2,7 @@ from mistralai.models.chat_completion import ChatMessage
 from mistralai.client import MistralClient
 import os
 
-def mistral(user_message, model="mistral-small-latest", is_json=False):
+def mistral(user_message, model="mistral-small-latest", is_json=True):
     client = MistralClient(api_key=os.getenv("LA_CLE_MISTRAL"))
     messages = [ChatMessage(role="user", content=user_message)]
 
