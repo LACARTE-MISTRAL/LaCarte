@@ -9,9 +9,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class ExtractFruitsModel(weave.Model):
+class ExtractFlashCard(weave.Model):
     model_name: str
-    prompt_template: str
+    prompt_template: str = (
+        'Generate a list of flashcard questions and answers as a JSON array of objects in the format '
+        '{"question": <str>, "answer": <str>, "tags": <str[]>} to test retention of the factual'
+        ' information in the following text:')
 
     @weave.op()
     async def predict(self, sentence: str) -> dict:
@@ -34,8 +37,15 @@ class ExtractFruitsModel(weave.Model):
 
 if __name__ == '__main__':
     weave.init('intro-example')
-    model = ExtractFruitsModel(model_name="mistral-small-latest",
-                               prompt_template='Extract fields ("fruit": <str>, "color": <str>, "flavor": <str>) from the following text, as json: {sentence}')
+    model = ExtractFlashCard(model_name="mistral-large-latest")
 
-    sentence = "There are many fruits that were found on the recently discovered planet Goocrux. There are neoskizzles that grow there, which are purple and taste like candy."
+    sentence = ("Élève de Poufsouffle, participant au tournoi des trois sorciers. Né en 1977, fils de Amos Diggory,"
+                " il est assassiné le 24 juin 1995 par Queudver (Peter Pettigrow) sous les ordres de Voldemort. En 1993, en cinquième"
+                " année, il devint le capitaine de l’équipe de quidditch où il joue comme attrapeur. C'est un très bon élève et il "
+                " devient également préfet. En 1994, Cedric est sélectionné par la Coupe de Feu pour représenter Poudlard au Tournoi"
+                " des Trois Sorciers. Il devient très proche de Cho Chang, ce qui rend Harry jaloux.  À la dernière épreuve du"
+                " tournoi, il remporte celui-ci, ex æquo avec Harry Potter, et touchant ensemble la coupe qui était en fait un "
+                " Portoloin, ils sont tous deux envoyés auprès de Voldemort, dans le cimetière de son père. C’est là qu’il est"
+                " assassiné par Peter Pettigrow sous les yeux de Harry.")
+
     print(asyncio.run(model.predict(sentence)))
