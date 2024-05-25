@@ -1,5 +1,11 @@
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect
-from flask_session import Session
+import os
+
+
+# API KEY AND MODEL
+load_dotenv()
+model = "mistral-large-latest"
 
 application = Flask(__name__)
 
@@ -9,9 +15,12 @@ def home():
     return render_template('index.html')
 
 
-@application.rotue('/process_text', methods=['POST'])
+@application.route('/process_text', methods=['POST'])
 def process_text():
     # Process the input text and display page with restul?
+    if request.method == 'POST':
+        data = request.form['text']
+        print(data)
     return "Results"
 
 if __name__ == '__main__':
