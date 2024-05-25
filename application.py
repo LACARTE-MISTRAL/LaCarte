@@ -6,7 +6,7 @@ application = Flask(__name__)
 # Define a route for the root URL ("/")
 @application.route('/')
 def home():
-    return "Hello, World!"
+    return render_template('index.html')
 
 if __name__ == '__main__':
     application.run(port=8000 ,debug=True)
