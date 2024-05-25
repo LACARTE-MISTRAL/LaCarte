@@ -7,12 +7,24 @@ document.addEventListener('DOMContentLoaded', event => {
     const submitTextForm = document.getElementById('submit-text');
     const cardContent = document.getElementById('card-content');
     const flashCardsForm = document.getElementById('flash-cards-form');
+    const loadingContainer = document.getElementById('loading-container');
     let cards = [];
-
 
     submitTextForm.addEventListener('submit', event =>
     {
         event.preventDefault();
+
+        initialDisplay.style.display = 'none';
+        
+        let loadingDiv = document.getElementById('loading');
+        
+        loadingDiv.textContent = 'Loading';
+
+        let loadingDots = 0;
+        let loadingInterval = setInterval(() => {
+            loadingDiv.textContent = 'Loading' + '.'.repeat(loadingDots);
+            loadingDots = (loadingDots + 1) % 4; 
+        }, 500); 
 
         fetch (submitTextForm.action, {
             method: submitTextForm.method,
@@ -20,14 +32,19 @@ document.addEventListener('DOMContentLoaded', event => {
         }).then(response => response.json())
         .then(data => {
             
+            clearInterval(loadingInterval);
+            loadingDiv.textContent = '';
+            loadingContainer.style.display = 'none';
+
             if (Object.keys(data).length === 0 && data.constructor === Object)
             {
                 alert('We can\'t make flashcards with that input, please try again')
+                location.reload();
                 return;
             }
 
-            initialDisplay.style.display = 'none';
-            flashCardsDisplay.style.display = 'block';
+
+            flashCardsDisplay.style.display = 'flex';
 
             let cardIndex = 0;
             let cards = data;
@@ -59,7 +76,6 @@ document.addEventListener('DOMContentLoaded', event => {
                         cardContent.innerHTML = data[cardIndex].front;
                     }
                 }
-                
             });
         });
     });

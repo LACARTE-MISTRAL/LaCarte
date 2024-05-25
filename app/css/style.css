@@ -47,15 +47,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#flash-cards {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#loading-container {
+#flash-cards-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,22 +66,12 @@ body {
 }
 
 #card-buttons {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
-    display: flex;
-    position: center;
-    justify-content: space-evenly;
-}
-
-#loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#go-back-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 16px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }

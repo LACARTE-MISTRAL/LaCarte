@@ -13,7 +13,7 @@ model = "mistral-large-latest"
 application = Flask(__name__)
 
 # Define a route for the root URL ("/")
-@application.route('/')
+@application.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
@@ -24,7 +24,11 @@ def process_text():
     if request.method == 'POST':
         data = request.form['text']
         countStr = mistral(extract_facts_prompt(data))
-        countStr = json.loads(countStr)
+        try:
+            countStr = json.loads(countStr)
+        except:
+            countStr = {'count': 2}
+        print(countStr)
         count = int(countStr['count']) if int(countStr['count']) < 8 else 8
         if count < 1:
             return jsonify({}), 200
