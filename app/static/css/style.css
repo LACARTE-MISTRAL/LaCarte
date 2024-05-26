@@ -1,8 +1,14 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 24px; 
-    line-height: 1.5; 
+    font-size: 24px;
+    line-height: 1.5;
     letter-spacing: 0.05em;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
 }
 
 #initial {
@@ -10,41 +16,52 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    width: 80%;
+    max-width: 600px;
+    padding: 32px;
+    border-radius: 24px;
+    border: 5px solid;
+    border-image: linear-gradient( 95.2deg, rgba(192,229,246,1) 26.8%, rgba(173,252,234,1) 64% );;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
-#initial h1 {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
+
+.title {
+    margin-bottom: 10px;
+    align-self: flex-start;
+    font-family: palatino, serif;
 }
 
-#initial form {
+#submit-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
 }
 
-#initial textarea {
-    font-size: 24px;
-    margin-bottom: 20px;
-    width: 80%; 
+textarea {
+    width: 100%;
     height: 250px;
-    flex-grow: 1;
-    background-color: transparent;
-    border: none;
-    outline: none !important;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
     resize: none;
+    font-style: italic;
 }
 
-#initial button {
-    border: 1 px solid black;
-    border-radius: 15px;
-    padding: 20px;
-    font-size: 24px;
-    font-family: Arial, Helvetica, sans-serif;
+.submit-btn {
+    align-self: flex-end;
+    max-width: 200px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
 
 #flash-cards {
@@ -64,13 +81,15 @@ body {
 }
 
 #card-content {
-    border: 1px solid black;
+    border: 5px solid;
+    border-image: linear-gradient( 95.2deg, rgba(192,229,246,1) 26.8%, rgba(173,252,234,1) 64% );;
     border-radius: 15px;
     width: 300px;
     height: 400px;
     padding: 20px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
     background-color: white;
+    text-align: center;
 }
 
 #card-buttons {
