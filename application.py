@@ -2,20 +2,20 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect
 import os
 
-
 # API KEY AND MODEL
 load_dotenv()
-model = "mistral-large-latest"
 
-application = Flask(__name__)
+model = "mistral-large-latest"
+app = Flask(__name__)
+app.secret_key = os.getenv("LA_CLE_MISTRAL")
 
 # Define a route for the root URL ("/")
-@application.route('/')
+@app.route('/')
 def home():
     return render_template('index.html')
 
 
-@application.route('/process_text', methods=['POST'])
+@app.route('/process_text', methods=['POST'])
 def process_text():
     # Process the input text and display page with restul?
     if request.method == 'POST':
@@ -24,4 +24,5 @@ def process_text():
     return "Results"
 
 if __name__ == '__main__':
-    application.run(port=8000 ,debug=True)
+    app.run(host='0.0.0.0', port=4242 ,debug=True)
+    

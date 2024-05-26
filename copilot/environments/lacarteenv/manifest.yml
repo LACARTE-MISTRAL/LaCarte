@@ -1,0 +1,7 @@
+name: lacarteenv
+type: Environment
+
+http:
+  public:
+    certificate: arn:aws:acm:eu-west-3:637423609571:certificate/a44b21bb-547f-4190-9e50-5e7d3afb38e1
+    domain: claricarte.life

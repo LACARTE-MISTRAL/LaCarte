@@ -1,0 +1,15 @@
+name: lacarte
+type: Load Balanced Web Service
+
+image:
+  build: ./Dockerfile
+
+cpu: 256
+memory: 512
+count: 1
+
+http:
+  path: '/'
+  alias: claricarte.life
+  certificates:
+    - arn:aws:acm:eu-west-3:637423609571:certificate/a44b21bb-547f-4190-9e50-5e7d3afb38e1
