@@ -39,7 +39,7 @@ class FlashCardModel(weave.Model):
 
 
 class DimensionModel(weave.Model):
-    model_name: str = "mixtral-8x7b-32768"
+    model_name: str = "mistral-small-latest"
     prompt_template: str = ("Analyze the following text and identify the number of distinct factual statements it contains."
                             " Provide the count of factual statements as a JSON array of objects in the format "
                             "`{ count : int }`'. Text: ")
@@ -47,35 +47,20 @@ class DimensionModel(weave.Model):
     @weave.op()
     def __call__(self, user_message, is_json=True):
 
-        client = Groq(api_key=os.getenv("GROK_API_KEY"))
+        client = MistralClient(api_key=os.getenv("LA_CLE_MISTRAL"))
 
-        completion = client.chat.completions.create(
+        chat_response = client.chat(
             model=self.model_name,
-            messages=[
-                {
-                    "role": "system",
-                    "content": self.prompt_template
-
-                },
-                {
-                    "role": "user",
-                    "content": user_message,
-                }
-            ],
-            temperature=1,
-            max_tokens=5000,
-            top_p=1,
-            stream=False,
-            stop=None,
-            response_format={"type" : "json_object"}
+            messages=[ChatMessage(role='system', content=self.prompt_template),
+                      ChatMessage(role="user", content=user_message)],
+            response_format={"type": "json_object"}
         )
 
         try:
-            response = json.loads(completion.choices[0].message.content)
+            count = json.loads(chat_response.choices[0].message.content)
         except json.JSONDecodeError:
-            response = {'count': 2}
-
-        return response
+            count = {'count': 2}
+        return count
         
 
 

@@ -8,7 +8,7 @@ from prompt import make_prompt, extract_facts_prompt
 
 # API KEY AND MODEL
 load_dotenv()
-model = "mixtral-8x7b-32768"
+model = "mistral-small-latest"
 
 application = Flask(__name__)
 
