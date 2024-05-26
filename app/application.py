@@ -25,15 +25,15 @@ def process_text():
     if request.method == 'POST':
         data = request.form['text']
         dimension_model = DimensionModel(model_name=model)
-        countStr = dimension_model(extract_facts_prompt(data))
+        countStr = dimension_model(data)
         print(countStr)
         count = int(countStr['count']) if int(countStr['count']) < 8 else 8
         if count < 1:
             return jsonify({}), 200
         flash_card_model = FlashCardModel()
-        response = flash_card_model(data, count)
-        cards = json.loads(response)
-    return jsonify(cards), 200
+        cards = flash_card_model.predict(data, count)
+        front_format = [{"front": c["question"], "back": c["answer"], "tags": c["tags"]} for c in cards]
+        return jsonify(front_format), 200
 
 
 if __name__ == '__main__':

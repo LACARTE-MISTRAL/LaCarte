@@ -1,6 +1,7 @@
 import json
 from pydantic import BaseModel
 
+# Download here the SQuAD dataset : https://rajpurkar.github.io/SQuAD-explorer/
 with open('train-v2.0.json') as f:
     data = json.load(f)
 

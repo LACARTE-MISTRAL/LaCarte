@@ -10,8 +10,8 @@ class FlashCardModel(weave.Model):
     model_name: str = "mistral-small-latest"
     json_schema: str = """
     {
-        front: string,
-        back: string,
+        question: string,
+        answer: string,
         tags: string[]
     }"""
 
@@ -19,7 +19,7 @@ class FlashCardModel(weave.Model):
                             f"`{json_schema}` to test retention of the factual information in the following text: ")
 
     @weave.op()
-    def __call__(self, user_message, count, is_json=True):
+    def predict(self, user_message: str, count: int, is_json=True):
 
         sysprompt = self.prompt_template.replace("{count}", str(count))
 
@@ -32,7 +32,10 @@ class FlashCardModel(weave.Model):
             response_format={"type": "json_object"}
         )
 
-        return chat_response.choices[0].message.content
+        return json.loads(chat_response.choices[0].message.content)
+
+    def __name__(self):
+        return "FlashCardModel"
 
 
 class DimensionModel(weave.Model):
