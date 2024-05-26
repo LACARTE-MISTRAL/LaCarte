@@ -3,7 +3,7 @@ import os
 
 import weave
 
-from evaluation.data_model import SquadDataset
+from app.evaluation.data_model import SquadDataset
 from kudo_model import ExtractFlashCard
 import json
 from mistralai.client import MistralClient
@@ -13,7 +13,7 @@ from mistralai.models.chat_completion import ChatMessage
 if __name__ == '__main__':
     model = ExtractFlashCard(model_name="mistral-small-latest")
 
-    with open('../datasets/train-v2.0.json') as f:
+    with open('../../datasets/train-v2.0.json') as f:
         data = json.load(f)
 
     sd = SquadDataset.parse_obj({"data": data["data"][:10]})

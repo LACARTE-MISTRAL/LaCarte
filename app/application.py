@@ -1,8 +1,8 @@
+import weave
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect
-import os
 import json
-from mistral import mistral
+from model import DimensionModel, FlashCardModel
 from prompt import make_prompt, extract_facts_prompt
 
 
@@ -20,19 +20,18 @@ def home():
 
 @application.route('/process_text', methods=['POST'])
 def process_text():
+    weave.init('Prod monitoring')
     # Process the input text and display page with restul?
     if request.method == 'POST':
         data = request.form['text']
-        countStr = mistral(extract_facts_prompt(data))
-        try:
-            countStr = json.loads(countStr)
-        except:
-            countStr = {'count': 2}
+        dimension_model = DimensionModel(model_name=model)
+        countStr = dimension_model(extract_facts_prompt(data))
         print(countStr)
         count = int(countStr['count']) if int(countStr['count']) < 8 else 8
         if count < 1:
             return jsonify({}), 200
-        response = mistral(make_prompt(count , data))
+        flash_card_model = FlashCardModel()
+        response = flash_card_model(data, count)
         cards = json.loads(response)
     return jsonify(cards), 200
 
