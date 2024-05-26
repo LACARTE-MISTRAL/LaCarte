@@ -1,8 +1,13 @@
-flask
-python-dotenv
+Flask==2.0.3
+Werkzeug==2.0.3
+python-dotenv==0.19.2
+
 mistralai
 
-# For Dataset stuffs
 pandas
 wandb
 weave
+
+pyqt5==5.15.7
+pyqtwebengine==5.15.7
+black>=22.3.0
