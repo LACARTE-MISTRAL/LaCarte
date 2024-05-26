@@ -1,8 +1,9 @@
 flask
 python-dotenv
 mistralai
-
+groq
 # For Dataset stuffs
 pandas
 wandb
 weave
+watchdog

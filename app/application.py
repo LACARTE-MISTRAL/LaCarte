@@ -8,7 +8,7 @@ from prompt import make_prompt, extract_facts_prompt
 
 # API KEY AND MODEL
 load_dotenv()
-model = "mistral-large-latest"
+model = "mixtral-8x7b-32768"
 
 application = Flask(__name__)
 
@@ -27,7 +27,7 @@ def process_text():
         dimension_model = DimensionModel(model_name=model)
         countStr = dimension_model(data)
         print(countStr)
-        count = int(countStr['count']) if int(countStr['count']) < 8 else 8
+        count = int(countStr['count']) if int(countStr['count']) < 5 else 5
         if count < 1:
             return jsonify({}), 200
         flash_card_model = FlashCardModel()

@@ -10,6 +10,9 @@ from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 import dotenv
 
+
+mistral_model="mistral-small-latest"
+
 dotenv.load_dotenv()
 
 
@@ -50,7 +53,7 @@ if __name__ == '__main__':
 
         try:
             chat_response = client.chat(
-                model="mistral-large-latest",
+                model=mistral_model,
                 messages=[ChatMessage(role='system',
                                       content="Give a number between 0% and 100% to indicate which part of the input context text is covered by"
                                               "the generated questions/answers. Answer ONLY with a number. Nothing else."),
@@ -69,7 +72,7 @@ if __name__ == '__main__':
         client = MistralClient(api_key=os.getenv("LA_CLE_MISTRAL"))
 
         chat_response = client.chat(
-            model="mistral-large-latest",
+            model=mistral_model,
             messages=[ChatMessage(role='system', content="Is this answer correct? Answer ONLY with the number of good responces. Nothing else."),
                       ChatMessage(role="user", content=f"QUESTIONS/ANSWER PAIRS : {model_output}" + f"\n CONTEXT : {target['sentence']} \n RESPONSE (a number between 0 and {len(model_output)} nothing else): ")]
         )
@@ -83,7 +86,7 @@ if __name__ == '__main__':
         client = MistralClient(api_key=os.getenv("LA_CLE_MISTRAL"))
 
         chat_response = client.chat(
-            model="mistral-large-latest",
+            model=mistral_model,
             messages=[ChatMessage(role='system',
                                   content="How many questions/answers are redundant? Answer ONLY with a number. Nothing else."),
                       ChatMessage(role="user",
